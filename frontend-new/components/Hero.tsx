@@ -10,7 +10,7 @@ export default function Hero() {
         {/* Left Content */}
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Hi, I’m <span className="text-yellow-300">Your Name</span>
+            Hi, I’m <span className="text-yellow-300">Naina Kumari</span>
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold mb-6">
             Aspiring Software Developer & AI Engineer
@@ -38,10 +38,13 @@ export default function Hero() {
 
         {/* Right Image */}
         <div className="flex-1 mt-10 md:mt-0 flex justify-center">
+
           <img
-            src="/profile.png"
+            src="\profile-image.png"
             alt="Profile"
-            className="w-60 h-60 md:w-72 md:h-72 rounded-full border-4 border-yellow-400 shadow-lg"
+            width={160}
+            height={160}
+            className="w-60 h-60 md:w-72 md:h-72 rounded-full border-4 border-yellow-400 shadow-lg   object-contain"
           />
         </div>
       </div>
