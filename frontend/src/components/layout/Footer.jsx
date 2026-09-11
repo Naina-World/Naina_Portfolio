@@ -21,7 +21,7 @@ export default function Footer() {
           <a href={profile?.socialLinks?.github || "https://github.com/Naina-World"} target="_blank" rel="noreferrer">
             <Github size={17} /> GitHub
           </a>
-          <a href={profile?.socialLinks?.linkedin || "https://www.linkedin.com/in/naina-kumari-681849373/"} target="_blank" rel="noreferrer">
+          <a href={profile?.socialLinks?.linkedin || "https://www.linkedin.com/in/naina-kumari-681849373"} target="_blank" rel="noreferrer">
             <Linkedin size={17} /> LinkedIn
           </a>
           <a href={`mailto:${profile?.email || "nainakumarii734@gmail.com"}`}>
