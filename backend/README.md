@@ -39,7 +39,6 @@ src/
 │   └── pagination.js
 └── validators/
     ├── auth.validator.js
-    └── contact.validator.js
 ```
 
 ## Setup
@@ -114,19 +113,6 @@ const result = await response.json();
 Contact form:
 
 ```js
-await fetch(`${API}/api/v1/contact`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    name,
-    email,
-    subject,
-    message,
-    service,
-    budget
-  })
-});
-```
 
 ## Production notes
 

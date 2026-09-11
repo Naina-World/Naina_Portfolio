@@ -9,13 +9,11 @@ import {
   updateProject,
   deleteProject,
   createSkill,
-  deleteSkill,
-  listContacts,
-  updateContactStatus
+  deleteSkill
 } from '../controllers/admin.controller.js';
 import { requireAdmin } from '../middlewares/auth.js';
 import { validate } from '../middlewares/validate.js';
-import { loginSchema, bootstrapSchema, contactStatusSchema } from '../validators/auth.validator.js';
+import { loginSchema, bootstrapSchema } from '../validators/auth.validator.js';
 
 const router = Router();
 
@@ -41,8 +39,5 @@ router.delete('/projects/:id', deleteProject);
 router.post('/skills', createSkill);
 router.delete('/skills/:id', deleteSkill);
 
-
-router.get('/contacts', listContacts);
-router.patch('/contacts/:id/status', validate(contactStatusSchema), updateContactStatus);
 
 export default router;

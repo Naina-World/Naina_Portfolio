@@ -10,7 +10,6 @@ Base path: `/api/v1`
 | GET | `/portfolio` | Profile + projects + skills + testimonials |
 | GET | `/projects` | Published projects with pagination/filtering |
 | GET | `/projects/:slug` | One published project |
-| POST | `/contact` | Save contact enquiry and send notification email |
 
 ### Projects query parameters
 

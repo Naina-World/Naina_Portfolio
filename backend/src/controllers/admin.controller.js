@@ -6,7 +6,6 @@ import { Profile } from '../models/Profile.js';
 import { Project } from '../models/Project.js';
 import { Skill } from '../models/Skill.js';
 
-import { Contact } from '../models/Contact.js';
 import { ApiError } from '../utils/apiError.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 
@@ -91,30 +90,3 @@ export const deleteSkill = asyncHandler(async (req, res) => {
 
 
 
-export const listContacts = asyncHandler(async (req, res) => {
-  const page = Math.max(Number.parseInt(req.query.page, 10) || 1, 1);
-  const limit = Math.min(Math.max(Number.parseInt(req.query.limit, 10) || 20, 1), 100);
-  const skip = (page - 1) * limit;
-
-  const [items, total] = await Promise.all([
-    Contact.find().sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
-    Contact.countDocuments()
-  ]);
-
-  return res.json({
-    success: true,
-    data: items,
-    meta: { page, limit, total, pages: Math.ceil(total / limit) }
-  });
-});
-
-export const updateContactStatus = asyncHandler(async (req, res) => {
-  const contact = await Contact.findByIdAndUpdate(
-    req.params.id,
-    { status: req.body.status },
-    { new: true, runValidators: true }
-  );
-
-  if (!contact) throw new ApiError(404, 'Contact not found');
-  return res.json({ success: true, data: contact });
-});

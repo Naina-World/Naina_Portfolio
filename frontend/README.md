@@ -78,7 +78,7 @@ const response = await fetch(
 return await response.json();
 ```
 
-Your backend already exposes the portfolio/contact endpoints, so the frontend can be switched from dummy data to MongoDB-backed data without changing the component structure.
+Your backend exposes the portfolio endpoints, so the frontend can be switched from dummy data to MongoDB-backed data without changing the component structure.
 
 
 ## Styling

@@ -34,7 +34,6 @@ export default function Header() {
               </NavLink>
             )
           )}
-          <Link className="border border-white/[.09] px-[15px] py-[10px] rounded-full !text-white max-[700px]:text-center max-[700px]:mt-2" to="/contact" onClick={handleClick}>Let's talk</Link>
         </nav>
 
         <button

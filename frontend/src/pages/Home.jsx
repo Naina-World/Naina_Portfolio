@@ -5,7 +5,6 @@ import Hero from "../components/home/Hero";
 import About from "../components/home/About";
 import Skills from "../components/home/Skills";
 import ProjectsPreview from "../components/home/ProjectsPreview";
-import ContactCTA from "../components/home/ContactCTA";
 
 export default function Home() {
   const { profile, status, error } = useSelector((state) => state.portfolio);
@@ -29,7 +28,6 @@ export default function Home() {
       <About profile={profile} />
       <Skills />
       <ProjectsPreview />
-      <ContactCTA profile={profile} />
     </PageShell>
   );
 }
