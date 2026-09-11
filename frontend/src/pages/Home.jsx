@@ -8,10 +8,20 @@ import ProjectsPreview from "../components/home/ProjectsPreview";
 import ContactCTA from "../components/home/ContactCTA";
 
 export default function Home() {
-  const { profile, status } = useSelector((state) => state.portfolio);
-   
+  const { profile, status, error } = useSelector((state) => state.portfolio);
 
-  if (status === "loading" || !profile) return <Loading />;
+  if (status === "failed") {
+    return (
+      <PageShell>
+        <div className="py-20 text-center">
+          <p className="text-lg font-medium text-red-600">Couldn't load the portfolio.</p>
+          <p className="mt-2 text-sm text-gray-500">{error}</p>
+        </div>
+      </PageShell>
+    );
+  }
+
+  if (status === "loading" || status === "idle" || !profile) return <Loading />;
 
   return (
     <PageShell>
