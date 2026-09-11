@@ -18,13 +18,13 @@ export default function Footer() {
         </div>
 
         <div className="flex justify-end gap-5 [&_a]:text-[#888f9d] [&_a]:text-xs [&_a]:inline-flex [&_a]:items-center [&_a]:gap-1.5 [&_a:hover]:text-white max-[900px]:justify-start max-[700px]:flex-wrap">
-          <a href={profile?.socialLinks?.github || "#"} target="_blank" rel="noreferrer">
+          <a href={profile?.socialLinks?.github || "https://github.com/Naina-World"} target="_blank" rel="noreferrer">
             <Github size={17} /> GitHub
           </a>
-          <a href={profile?.socialLinks?.linkedin || "#"} target="_blank" rel="noreferrer">
+          <a href={profile?.socialLinks?.linkedin || "https://www.linkedin.com/in/naina-kumari-681849373/"} target="_blank" rel="noreferrer">
             <Linkedin size={17} /> LinkedIn
           </a>
-          <a href={`mailto:${profile?.email || "hello@example.com"}`}>
+          <a href={`mailto:${profile?.email || "nainakumarii734@gmail.com"}`}>
             <Mail size={17} /> Email
           </a>
         </div>
