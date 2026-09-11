@@ -3,7 +3,7 @@ import { Mail, MapPin, Send } from "lucide-react";
 import { useSelector } from "react-redux";
 import PageShell from "../components/layout/PageShell";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL||"http://localhost:5000/api/v1";
 
 export default function ContactPage() {
   const profile = useSelector((state) => state.portfolio.profile);
