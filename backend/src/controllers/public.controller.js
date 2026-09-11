@@ -1,36 +1,49 @@
-import crypto from 'node:crypto';
+
 import { env } from '../config/env.js';
+
 import { Profile } from '../models/Profile.js';
 import { Project } from '../models/Project.js';
 import { Skill } from '../models/Skill.js';
 
-import { Contact } from '../models/Contact.js';
-import { sendContactNotification } from '../services/mail.service.js';
 import { ApiError } from '../utils/apiError.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { getPagination } from '../utils/pagination.js';
 
-function hashIp(ip) {
-  return crypto.createHmac('sha256', env.JWT_SECRET).update(ip || 'unknown').digest('hex');
-}
-
 export const getPortfolio = asyncHandler(async (_req, res) => {
-  const [profile, projects, skills, ] = await Promise.all([
+  const [profile, projects, skills] = await Promise.all([
     Profile.findOne().lean(),
-    Project.find({ published: true }).sort({ featured: -1, sortOrder: 1, createdAt: -1 }).lean(),
-    Skill.find({ visible: true }).sort({ category: 1, sortOrder: 1 }).lean()
-    
+
+    Project.find({ published: true })
+      .sort({ featured: -1, sortOrder: 1, createdAt: -1 })
+      .lean(),
+
+    Skill.find({ visible: true })
+      .sort({ category: 1, sortOrder: 1 })
+      .lean()
   ]);
 
-  return res.json({ success: true, data: { profile, projects, skills  } });
+  return res.json({
+    success: true,
+    data: {
+      profile,
+      projects,
+      skills
+    }
+  });
 });
 
 export const listProjects = asyncHandler(async (req, res) => {
   const { page, limit, skip } = getPagination(req.query);
+
   const filter = { published: true };
 
-  if (req.query.category) filter.category = req.query.category;
-  if (req.query.featured === 'true') filter.featured = true;
+  if (req.query.category) {
+    filter.category = req.query.category;
+  }
+
+  if (req.query.featured === 'true') {
+    filter.featured = true;
+  }
 
   const [items, total] = await Promise.all([
     Project.find(filter)
@@ -38,37 +51,35 @@ export const listProjects = asyncHandler(async (req, res) => {
       .skip(skip)
       .limit(limit)
       .lean(),
+
     Project.countDocuments(filter)
   ]);
 
   return res.json({
     success: true,
     data: items,
-    meta: { page, limit, total, pages: Math.ceil(total / limit) }
+    meta: {
+      page,
+      limit,
+      total,
+      pages: Math.ceil(total / limit)
+    }
   });
 });
 
 export const getProject = asyncHandler(async (req, res) => {
-  const project = await Project.findOne({ slug: req.params.slug, published: true }).lean();
-  if (!project) throw new ApiError(404, 'Project not found');
-  return res.json({ success: true, data: project });
-});
+  const project = await Project.findOne({
+    slug: req.params.slug,
+    published: true
+  }).lean();
 
-export const createContact = asyncHandler(async (req, res) => {
-  const contact = await Contact.create({
-    ...req.body,
-    ipHash: hashIp(req.ip)
-  });
-
-  try {
-    await sendContactNotification(contact);
-  } catch (mailError) {
-    console.error('Contact email failed:', mailError);
+  if (!project) {
+    throw new ApiError(404, 'Project not found');
   }
 
-  return res.status(201).json({
+  return res.json({
     success: true,
-    message: 'Thanks! Your message has been received.',
-    data: { id: contact._id }
+    data: project
   });
 });
+
