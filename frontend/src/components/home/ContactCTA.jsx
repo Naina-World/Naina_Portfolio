@@ -11,7 +11,6 @@ export default function ContactCTA({ profile }) {
           <h2>Let's build something useful.</h2>
           <p>I'm open to full-time opportunities, internships and selected freelance work.</p>
           <div className="flex flex-wrap gap-3 mt-[30px] max-[900px]:justify-center">
-            
             <a className="min-h-[45px] inline-flex items-center justify-center gap-2 px-[18px] rounded-[10px] border border-white/[.09] font-bold text-[13px] transition-transform duration-200 transition-colors hover:-translate-y-0.5 hover:border-white/20 bg-white/[.03] text-[#e9ebef]" href={`mailto:${profile.email}`}>{profile.email}</a>
           </div>
         </div>
